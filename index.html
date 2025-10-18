@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Hồ sơ nhà phát triển web Nguyễn Gia Huy, chuyên về React, Tailwind CSS và các giải pháp web responsive.">
+    <meta name="keywords" content="nhà phát triển web, full-stack, React, Tailwind CSS, portfolio, học tiếng Anh, phần mềm">
+    <meta name="author" content="Nguyễn Gia Huy">
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Hồ Sơ Nhà Phát Triển Web - Nguyễn Gia Huy">
+    <meta property="og:description" content="Khám phá các dự án web và ứng dụng học tiếng Anh của Nguyễn Gia Huy, chuyên gia về React và Tailwind CSS.">
+    <meta property="og:image" content="https://example.com/profile-image.jpg">
+    <meta property="og:url" content="https://nguyengiahuy.dev">
+    <meta property="og:type" content="website">
+    <title>Hồ Sơ Nhà Phát Triển Web - Nguyễn Gia Huy</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Font Poppins */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f9a8d4, #f3e8ff);
+            color: #1f2937;
+            overflow-x: hidden;
+        }
+        header {
+            background: linear-gradient(to right, #ec4899, #a855f7);
+        }
+        .project-card, .skill-card {
+            background: #ffffff;
+        }
+        /* Hiệu ứng fade-in */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeIn 1s ease-out forwards;
+        }
+        @keyframes fadeIn {
+            to { opacity: 1; transform: translateY(0); }
+        }
+        /* Hiệu ứng hover */
+        .project-card:hover, .submit-btn:hover, .skill-card:hover {
+            transform: scale(1.03);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        /* Hiệu ứng parallax nhẹ */
+        .parallax {
+            transform: translateY(10px);
+            transition: transform 0.5s ease-out;
+        }
+        section:hover .parallax {
+            transform: translateY(0);
+        }
+        /* Cuộn mượt */
+        html {
+            scroll-behavior: smooth;
+        }
+        /* Menu mobile */
+        #menu-toggle {
+            display: none;
+        }
+        #menu-toggle:checked ~ .menu {
+            display: flex;
+            transform: translateX(0);
+        }
+        .menu {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(236, 72, 153, 0.95);
+            z-index: 30;
+            transform: translateX(100%);
+            transition: transform 0.3s ease-in-out;
+        }
+        .menu a {
+            font-size: 1.75rem;
+            padding: 1.5rem;
+            color: white;
+            text-align: center;
+            width: 100%;
+            transition: background-color 0.2s ease;
+        }
+        .menu a:hover {
+            background-color: #d53f8c;
+        }
+        .close-btn {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 2rem;
+            color: white;
+            cursor: pointer;
+        }
+        @media (min-width: 640px) {
+            .menu {
+                display: flex;
+                position: static;
+                flex-direction: row;
+                background: transparent;
+                transform: none;
+                width: auto;
+                height: auto;
+            }
+            .menu a {
+                font-size: 1rem;
+                padding: 0.5rem;
+                width: auto;
+            }
+            .close-btn {
+                display: none;
+            }
+        }
+        /* Hiệu ứng hoa rơi */
+        .flower {
+            position: fixed;
+            top: -40px;
+            width: 35px;
+            height: 35px;
+            font-size: 35px;
+            line-height: 35px;
+            text-align: center;
+            animation: fall linear infinite, sway ease-in-out infinite alternate;
+            z-index: -1;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        @keyframes fall {
+            0% { transform: translateY(-40px) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+        }
+        @keyframes sway {
+            0% { transform: translateX(-10px); }
+            100% { transform: translateX(10px); }
+        }
+        .flower:nth-child(1) { left: 10%; animation-duration: 7s, 2s; content: '🌸'; color: #ff69b4; }
+        .flower:nth-child(2) { left: 20%; animation-duration: 8s, 2.5s; animation-delay: 0.5s; content: '🌺'; color: #ffb6c1; }
+        .flower:nth-child(3) { left: 30%; animation-duration: 6s, 2s; animation-delay: 1s; content: '🌷'; color: #fff0f5; }
+        .flower:nth-child(4) { left: 40%; animation-duration: 9s, 2.2s; animation-delay: 1.5s; content: '🌸'; color: #ffc1cc; }
+        .flower:nth-child(5) { left: 50%; animation-duration: 7s, 2.3s; animation-delay: 2s; content: '🌺'; color: #ff69b4; }
+        .flower:nth-child(6) { left: 60%; animation-duration: 8s, 2s; animation-delay: 0.8s; content: '🌷'; color: #ffb6c1; }
+        .flower:nth-child(7) { left: 70%; animation-duration: 6s, 2.5s; animation-delay: 1.2s; content: '🌸'; color: #fff0f5; }
+        .flower:nth-child(8) { left: 80%; animation-duration: 7s, 2s; animation-delay: 1.8s; content: '🌺'; color: #ffc1cc; }
+        /* Biểu đồ kỹ năng */
+        .progress-bar {
+            height: 12px;
+            background: #e5e7eb;
+            border-radius: 6px;
+            overflow: hidden;
+        }
+        .progress {
+            height: 100%;
+            background: #ec4899;
+            transition: width 1s ease-in-out;
+        }
+        /* Tối ưu cho mobile */
+        @media (max-width: 640px) {
+            h1 {
+                font-size: 2rem;
+            }
+            h2 {
+                font-size: 1.75rem;
+            }
+            p, a, input, textarea, button {
+                font-size: 1.1rem;
+            }
+            .container {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+            .project-card img {
+                height: 8rem;
+            }
+            .submit-btn {
+                padding: 0.75rem 2rem;
+            }
+            .progress-bar {
+                height: 14px;
+            }
+            .flower {
+                width: 30px;
+                height: 30px;
+                font-size: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hiệu ứng hoa rơi -->
+    <div class="flower"></div>
+    <div class="flower"></div>
+    <div class="flower"></div>
+    <div class="flower"></div>
+    <div class="flower"></div>
+    <div class="flower"></div>
+    <div class="flower"></div>
+    <div class="flower"></div>
+
+    <!-- Phần đầu -->
+    <header class="text-white py-4 sticky top-0 z-10">
+        <div class="container mx-auto flex justify-between items-center px-4">
+            <div>
+                <h1 class="text-3xl font-bold fade-in">Nguyễn Gia Huy</h1>
+                <p class="text-lg fade-in">Nhà Phát Triển Web Full-Stack</p>
+            </div>
+            <div class="sm:hidden">
+                <input type="checkbox" id="menu-toggle" class="hidden">
+                <label for="menu-toggle" class="cursor-pointer" aria-label="Mở menu">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                    </svg>
+                </label>
+                <nav class="menu" role="navigation" aria-label="Menu điều hướng chính">
+                    <label for="menu-toggle" class="close-btn" aria-label="Đóng menu">✕</label>
+                    <a href="#about" class="hover:bg-pink-700">Về Tôi</a>
+                    <a href="#skills" class="hover:bg-pink-700">Kỹ Năng</a>
+                    <a href="#projects" class="hover:bg-pink-700">Dự Án</a>
+                    <a href="#contact" class="hover:bg-pink-700">Liên Hệ</a>
+                    <a href="https://linkedin.com/in/nguyengiahuy" class="hover:bg-pink-700">LinkedIn</a>
+                    <a href="https://github.com/nguyengiahuy" class="hover:bg-pink-700">GitHub</a>
+                    <a href="https://nguyengiahuy.dev" class="hover:bg-pink-700">Portfolio</a>
+                </nav>
+            </div>
+            <nav class="hidden sm:flex space-x-4" role="navigation" aria-label="Menu điều hướng chính">
+                <a href="#about" class="hover:underline text-lg">Về Tôi</a>
+                <a href="#skills" class="hover:underline text-lg">Kỹ Năng</a>
+                <a href="#projects" class="hover:underline text-lg">Dự Án</a>
+                <a href="#contact" class="hover:underline text-lg">Liên Hệ</a>
+                <a href="https://linkedin.com/in/nguyengiahuy" class="hover:underline text-lg">LinkedIn</a>
+                <a href="https://github.com/nguyengiahuy" class="hover:underline text-lg">GitHub</a>
+                <a href="https://nguyengiahuy.dev" class="hover:underline text-lg">Portfolio</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Phần giới thiệu -->
+    <section id="about" class="container mx-auto py-8">
+        <h2 class="text-3xl font-semibold text-center mb-4 fade-in parallax">Về Tôi</h2>
+        <p class="text-lg max-w-2xl mx-auto fade-in" role="region" aria-label="Giới thiệu về Nguyễn Gia Huy">
+            Nhà phát triển tận tâm với hơn 2 năm kinh nghiệm xây dựng giao diện người dùng responsive bằng React và Tailwind CSS. Đam mê tạo ra các giải pháp web có khả năng mở rộng; đã tăng tốc độ tải trang lên 25% trong dự án gần nhất.
+        </p>
+    </section>
+
+    <!-- Phần kỹ năng -->
+    <section id="skills" class="bg-white py-8">
+        <div class="container mx-auto">
+            <h2 class="text-3xl font-semibold text-center mb-4 fade-in parallax">Kỹ Năng</h2>
+            <div class="max-w-2xl mx-auto space-y-4">
+                <div class="fade-in skill-card px-4" role="region" aria-label="Kỹ năng HTML/CSS/JS">
+                    <p class="font-medium text-lg">HTML/CSS/JS</p>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 90%;"></div>
+                    </div>
+                    <p class="text-sm text-gray-600">Chuyên gia (90%)</p>
+                </div>
+                <div class="fade-in skill-card px-4" role="region" aria-label="Kỹ năng React">
+                    <p class="font-medium text-lg">React</p>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 80%;"></div>
+                    </div>
+                    <p class="text-sm text-gray-600">Nâng cao (80%)</p>
+                </div>
+                <div class="fade-in skill-card px-4" role="region" aria-label="Kỹ năng Node.js">
+                    <p class="font-medium text-lg">Node.js</p>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 60%;"></div>
+                    </div>
+                    <p class="text-sm text-gray-600">Trung cấp (60%)</p>
+                </div>
+                <div class="fade-in skill-card px-4" role="region" aria-label="Kỹ năng MySQL">
+                    <p class="font-medium text-lg">MySQL</p>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 60%;"></div>
+                    </div>
+                    <p class="text-sm text-gray-600">Trung cấp (60%)</p>
+                </div>
+                <div class="fade-in skill-card px-4" role="region" aria-label="Kỹ năng Git">
+                    <p class="font-medium text-lg">Git</p>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 80%;"></div>
+                    </div>
+                    <p class="text-sm text-gray-600">Nâng cao (80%)</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Phần dự án -->
+    <section id="projects" class="container mx-auto py-8">
+        <h2 class="text-3xl font-semibold text-center mb-4 fade-in parallax">Dự Án</h2>
+        <div class="grid grid-cols-1 gap-4">
+            <div class="bg-white p-4 rounded-lg shadow-md project-card fade-in" role="region" aria-label="Dự án Website Bán Phần Mềm">
+                <img src="https://github.com/nguyengiahuydev/nguyengiahuy/blob/main/anhwebphanmem.jpg?raw=true" alt="Website bán phần mềm" class="w-full h-40 object-cover rounded-md mb-3">
+                <h3 class="text-xl font-semibold">Website Bán Phần Mềm</h3>
+                <p class="text-gray-600 mt-2">Phát triển một nền tảng thương mại điện tử chuyên cung cấp các giải pháp phần mềm, với giao diện responsive và tối ưu SEO, sử dụng React và Tailwind CSS.</p>
+                <a href="https://shopphanmemvip.site" class="text-pink-600 hover:underline mt-3 inline-block text-lg">Xem Dự Án</a>
+            </div>
+            <div class="bg-white p-4 rounded-lg shadow-md project-card fade-in" role="region" aria-label="Dự án Website Học Tiếng Anh">
+                <img src="https://via.placeholder.com/300x150?text=Học+Tiếng+Anh" alt="Website học tiếng Anh" class="w-full h-40 object-cover rounded-md mb-3">
+                <h3 class="text-xl font-semibold">Website Học Tiếng Anh</h3>
+                <p class="text-gray-600 mt-2">Xây dựng website học tiếng Anh với các bài học tương tác, tích hợp video và bài kiểm tra, sử dụng Node.js và MySQL để quản lý dữ liệu người dùng.</p>
+                <a href="https://example.com/english-learning" class="text-pink-600 hover:underline mt-3 inline-block text-lg">Xem Dự Án</a>
+            </div>
+            <div class="bg-white p-4 rounded-lg shadow-md project-card fade-in" role="region" aria-label="Dự án App Học Tiếng Anh">
+                <img src="https://via.placeholder.com/300x150?text=App+Học+Tiếng+Anh" alt="App học tiếng Anh" class="w-full h-40 object-cover rounded-md mb-3">
+                <h3 class="text-xl font-semibold">App Học Tiếng Anh</h3>
+                <p class="text-gray-600 mt-2">Phát triển ứng dụng iOS học tiếng Anh với file .ipa, hỗ trợ cài đặt qua AltStore hoặc chứng chỉ doanh nghiệp, cung cấp bài học tương tác và theo dõi tiến độ.</p>
+                <a href="https://shopphanmemvip.site/app/" class="text-pink-600 hover:underline mt-3 inline-block text-lg">Tải Ứng Dụng</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Phần liên hệ -->
+    <section id="contact" class="bg-gradient-to-r from-pink-500 to-purple-500 text-white py-8">
+        <div class="container mx-auto text-center">
+            <h2 class="text-3xl font-semibold mb-4 fade-in parallax">Liên Hệ</h2>
+            <div class="max-w-lg mx-auto">
+                <form action="/submit" class="space-y-4 fade-in" role="form" aria-label="Biểu mẫu liên hệ">
+                    <div>
+                        <label for="name" class="block text-lg font-medium mb-1">Họ Tên</label>
+                        <input type="text" id="name" name="name" class="w-full p-3 rounded-lg bg-white text-gray-800 focus:outline-none focus:ring-2 focus:ring-pink-300 text-lg" placeholder="Nhập họ tên" required aria-required="true">
+                    </div>
+                    <div>
+                        <label for="email" class="block text-lg font-medium mb-1">Email</label>
+                        <input type="email" id="email" name="email" class="w-full p-3 rounded-lg bg-white text-gray-800 focus:outline-none focus:ring-2 focus:ring-pink-300 text-lg" placeholder="Nhập email" required aria-required="true">
+                    </div>
+                    <div>
+                        <label for="message" class="block text-lg font-medium mb-1">Tin Nhắn</label>
+                        <textarea id="message" name="message" rows="4" class="w-full p-3 rounded-lg bg-white text-gray-800 focus:outline-none focus:ring-2 focus:ring-pink-300 text-lg" placeholder="Nhập tin nhắn của bạn" required aria-required="true"></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn bg-pink-600 text-white py-3 px-8 rounded-lg hover:bg-pink-700 focus:outline-none focus:ring-2 focus:ring-pink-300 text-lg">Gửi Tin Nhắn</button>
+                </form>
+                <p class="text-lg mt-4 fade-in" role="region" aria-label="Thông tin liên hệ bổ sung">Hoặc liên hệ trực tiếp: <a href="mailto:huynofa@gmail.com" class="underline text-lg">huynofa@gmail.com</a> | 035-565-6730</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-6">
+        <div class="container mx-auto text-center">
+            <p class="text-lg mb-2">© 2025 Nguyễn Gia Huy. All rights reserved.</p>
+            <div class="flex justify-center space-x-4">
+                <a href="https://linkedin.com/in/nguyengiahuy" class="hover:underline text-lg">LinkedIn</a>
+                <a href="https://github.com/nguyengiahuy" class="hover:underline text-lg">GitHub</a>
+                <a href="https://nguyengiahuy.dev" class="hover:underline text-lg">Portfolio</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
